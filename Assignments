@@ -24,8 +24,11 @@ where you will use a daemon set instead of replica set:
      port refers to the service, target port refers to port on the container that the service should direct and Nodeport type refers to cluster IP.
      create a nodeport service, than all worker nodes in the kubecluster is listening on the Nodeport’s port, even workers that doesn’t have the pod.
      create a service with selector point to the pods, use NodePort type, and be sure deploy kube-proxy on every node.
-     --> kubectl expose command to create a NodePort Service for the ReplicaSet. 
+     --> kubectl expose command to create a NodePort Service for the ReplicaSet
      --> Kubectl apply -f <filename>
      --> kubectl get rs
+     After creating service file and deployment file,---> kubectl create -f <deployments_file>, kunectl create -f <service_file> then --> kubectl get deployments , kubectl get services,
+     --> we need to check with this command, kubectl describe services <service_name>
+     In that case, will see the external port ip, kubectl run kubernetes-bootcamp --image=[image-name] --port=8080
      Service for manifest file,
      --> kubectl expose rs <replica_set> --port=8000 --type=Nodeport --dry-run=client -o<file_extension> > <replicaset_filename>
