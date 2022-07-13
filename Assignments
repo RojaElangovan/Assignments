@@ -1,0 +1,31 @@
+Assignment -1 
+where you will use a daemon set instead of replica set:
+     DaemonSets is to run a Pod across every node in a Kubernetes cluster. Some of the use cases are, running a cluster storage, log collection and node monitoring 
+     daemon on every node. where as in Replica set, group of pods called Node.If Node get's down, pods running in a node randomly schedule on different nodes as per 
+     resource availability.
+     In Daemon set, If any of the node get's destroyed, inside the pod running on a node also destroyed. If new node is createdin our cluster then automatically Daemon 
+     set allocates pod on that node.
+     
+ Assignment -2
+ steps needed to update a container's image using deployment:
+    With the help of base image, we are creating new images with the help of Dockerfile. 
+    1) Already running container contains imageid, on top of that we are used to create docker commit <imageid>, then docker image ls--> docker images list then 
+    docker ps -a --> it will show current status of container's. then docker tag <repository:tag> 
+    2) Create Image with the help of Dockerfile:
+       docker file contains commands instruction to be executed, For each step --create--> each image id as a layer atlast it will execute Build image id and tag.
+        docker build -t <tag> , docker build -f <filename> , docker build <context-dir> . ,then do docker image ls
+        Steps for Dockerfile:
+       Base image, Labels, Working dir<path to file>,copy from <src> <dest>,ADD<src file> <dest>, ENTRYPOINT <commands> , CMD<arguments>.
+       
+       
+ Assignment -3
+ Service:
+     kubectl expose command to create a NodePort Service for a ReplicaSet.kubectl expose rs <REPLICASET_NAME> --port=<PORT> --target-port=<TARGET_PORT> --type=NodePort.
+     port refers to the service, target port refers to port on the container that the service should direct and Nodeport type refers to cluster IP.
+     create a nodeport service, than all worker nodes in the kubecluster is listening on the Nodeport’s port, even workers that doesn’t have the pod.
+     create a service with selector point to the pods, use NodePort type, and be sure deploy kube-proxy on every node.
+     --> kubectl expose command to create a NodePort Service for the ReplicaSet. 
+     --> Kubectl apply -f <filename>
+     --> kubectl get rs
+     Service for manifest file,
+     --> kubectl expose rs <replica_set> --port=8000 --type=Nodeport --dry-run=client -o<file_extension> > <replicaset_filename>
